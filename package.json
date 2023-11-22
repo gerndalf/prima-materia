@@ -1,15 +1,16 @@
 {
-  "name": "prima-materia",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^4.0.4"
-  },
-  "dependencies": {
-    "ol": "latest"
-  }
+    "name": "prima-materia",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
+    },
+    "devDependencies": {
+        "vite": "^4.5.0"
+    },
+    "dependencies": {
+        "eslint": "^8.54.0",
+        "ol": "latest"
+    }
 }

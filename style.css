@@ -1,12 +1,68 @@
 @import "node_modules/ol/ol.css";
 
-html, body {
-  margin: 0;
-  height: 100%;
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
+
 #map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.control-container {
+    list-style-type: none;
+    padding: 40px;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.custom-control {
+    position: relative;
+    font-size: 3rem;
+    z-index: 1;
+    padding: 5px;
+    margin: 0;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: green;
+    text-shadow: -4px 4px 10px gray;
+    transition: 0.3s;
+}
+
+.custom-control:hover {
+    text-shadow: -4px 4px 10px green;
+}
+
+.destination-modal {
+    position: absolute;
+    display: flex;
+    right: 20px;
+    bottom: 20px;
+    width: 50%;
+    height: fit-content;
+    z-index: 2;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.75s linear;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.75s, opacity 0.75s linear;
 }
