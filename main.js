@@ -22,8 +22,12 @@ const thirdPOI = new Feature({
     geometry: new Point(fromLonLat([-90.19917552665406, 38.62652310190238]))
 });
 
+const fourthPOI = new Feature({
+    geometry: new Point(fromLonLat([-94.60182061170312, 39.101927475378396]))
+});
+
 const vectorSource = new VectorSource({
-    features: [firstPOI, secondPOI, thirdPOI],
+    features: [firstPOI, secondPOI, thirdPOI, fourthPOI],
 });
 
 
@@ -50,9 +54,9 @@ const map = new Map({
 
 // TODO : Kirb switcher event handler
 
-const gifUrl = 'data/star.gif';
-const gif = gifler(gifUrl);
-gif.frames(
+const blackGifUrl = 'data/black_star.gif';
+const blackGif = gifler(blackGifUrl);
+blackGif.frames(
     document.createElement('canvas'),
     (ctx, frame) => {
         if (!firstPOI.getStyle()) {
@@ -65,6 +69,17 @@ gif.frames(
                 })
             );
         }
+        ctx.drawImage(frame.buffer, frame.x, frame.y);
+        map.render();
+    },
+    true
+);
+
+const whiteGifUrl = 'data/white_star.gif';
+const whiteGif = gifler(whiteGifUrl);
+whiteGif.frames(
+    document.createElement('canvas'),
+    (ctx, frame) => {
         if (!secondPOI.getStyle()) {
             secondPOI.setStyle(
                 new Style({
@@ -75,12 +90,44 @@ gif.frames(
                 })
             );
         }
+        ctx.drawImage(frame.buffer, frame.x, frame.y);
+        map.render();
+    },
+    true
+);
+
+const yellowGifUrl = 'data/yellow_star.gif';
+const yellowGif = gifler(yellowGifUrl);
+yellowGif.frames(
+    document.createElement('canvas'),
+    (ctx, frame) => {
         if (!thirdPOI.getStyle()) {
             thirdPOI.setStyle(
                 new Style({
                     image: new Icon({
                         img: ctx.canvas,
-                        imgSize: [frame.width, frame.height],
+                        imgSize: [frame.width, frame.height]
+                    }),
+                })
+            );
+        }
+        ctx.drawImage(frame.buffer, frame.x, frame.y);
+        map.render();
+    },
+    true
+);
+
+const redGifUrl = 'data/red_star.gif';
+const redGif = gifler(redGifUrl);
+redGif.frames(
+    document.createElement('canvas'),
+    (ctx, frame) => {
+        if (!fourthPOI.getStyle()) {
+            fourthPOI.setStyle(
+                new Style({
+                    image: new Icon({
+                        img: ctx.canvas,
+                        imgSize: [frame.width, frame.height]
                     }),
                 })
             );
