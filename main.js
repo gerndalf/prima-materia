@@ -10,6 +10,10 @@ import { fromLonLat } from 'ol/proj';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 
+////////////////////////////////////////////////////////////////////////////
+/// Points of Interest to be displayed on the map.
+////////////////////////////////////////////////////////////////////////////
+
 const firstPOI = new Feature({
     geometry: new Point(fromLonLat([-99.32770157555619, 38.87965489908172]))
 });
@@ -26,6 +30,10 @@ const fourthPOI = new Feature({
     geometry: new Point(fromLonLat([-94.60182061170312, 39.101927475378396]))
 });
 
+////////////////////////////////////////////////////////////////////////////
+/// OpenLayer components for rendering
+////////////////////////////////////////////////////////////////////////////
+
 const vectorSource = new VectorSource({
     features: [firstPOI, secondPOI, thirdPOI, fourthPOI],
 });
@@ -35,12 +43,14 @@ const vectorLayer = new VectorLayer({
     source: vectorSource,
 });
 
+//Sets default screen for user to begin navigation
 const view = new View({
     center: [-10565627, 4714377],
     zoom: 6,
     extent: [-13051129, 3256350, -8054498, 6191704]
 })
 
+// ol Map that targets the 'map' div from index
 const map = new Map({
     view: view,
     layers: [
@@ -52,8 +62,11 @@ const map = new Map({
     target: 'map',
 });
 
-// TODO : Kirb switcher event handler
+////////////////////////////////////////////////////////////////////////////
+/// POI Icon Styling Gifs
+////////////////////////////////////////////////////////////////////////////
 
+// Using public gifler api to handle frames and canvas interplay with ol
 const blackGifUrl = 'data/black_star.gif';
 const blackGif = gifler(blackGifUrl);
 blackGif.frames(
@@ -139,7 +152,7 @@ redGif.frames(
 );
 
 ////////////////////////////////////////////////////////////////////////////
-/// Event listeners to hide modal during map movement.
+/// Event listeners to hide modal during map interactions.
 ////////////////////////////////////////////////////////////////////////////
 
 map.on("singleclick", () => {
@@ -172,11 +185,16 @@ map.on("pointerdrag", () => {
 ////////////////////////////////////////////////////////////////////////////
 
 window.addEventListener("DOMContentLoaded", () => {
-    // Hides modal on every page refresh.
+    // Hides story modal on every page refresh.
     // document.getElementById("modal-container").style.visibility = 'hidden';
     if (document.getElementById("modal-container").classList.contains('visible')) {
         document.getElementById("modal-container").classList.remove('visible');
         document.getElementById("modal-container").classList.add('hidden');
+    }
+
+    if (document.getElementById("footer").classList.contains('footer-visible')) {
+        document.getElementById("footer").classList.remove('footer-visible');
+        document.getElementById("footer").classList.add('footer-hidden');
     }
 
     document.getElementById("control1").addEventListener(
@@ -190,7 +208,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 zoom: 14,
 
             })
-            setDescriptionModal("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            setDescriptionModal("My journey begins in Western Kansas, a flat empty plain akin to an empty canvas. The first crude lines of which I would scratch on at university. By studying a wide berth of STEM topics and cultural niches, I would gain a broader understanding of the world’s logic and my place in it.");
 
         },
         false
@@ -208,7 +226,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 zoom: 12,
 
             })
-            setDescriptionModal("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            setDescriptionModal("I moved on to accomplish bigger dreams, necessitating a move to bigger places. Here I would clean up my lines by immersing myself in every industry at my fingertips. Through trial and error I came upon a deeper grasp of people and their motives and emotions. I had developed a respect for the smallness of big places.");
 
         },
         false
@@ -225,7 +243,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 zoom: 12,
 
             })
-            setDescriptionModal("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            setDescriptionModal("After hitting a wall, my goals would bring me to embrace a more disciplined lifestyle. My career and skills flourished while my canvas was neglected. I wisened through the pains of bureaucracy and sought a new place in my industry. My small chunk of world became bigger and even still was smaller.");
 
         },
         false
@@ -243,11 +261,24 @@ window.addEventListener("DOMContentLoaded", () => {
                 zoom: 12,
 
             })
-            setDescriptionModal("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            setDescriptionModal("My next stage encompasses the fruition of life goals. Solidifying a home both in work and life, the final expressions to be placed on my not-forgotten work of art. A return to self-interests and family; a rediscovery of self-devotions and mind. My world would come like circles, biggest of all but smaller than ever.");
 
         },
         false
     );
+
+    document.getElementById("footer-button").addEventListener(
+        'click',
+        () => {
+            if (document.getElementById("footer").classList.contains('footer-visible')) {
+                document.getElementById("footer").classList.remove('footer-visible');
+                document.getElementById("footer").classList.add('footer-hidden');
+            } else {
+                document.getElementById("footer").classList.remove('footer-hidden');
+                document.getElementById("footer").classList.add('footer-visible');
+            }
+        }
+    )
 });
 
 // Handles modal visibility and fade in/out for smooth text transition.
